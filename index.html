@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RSA Simulator</title>
+  <style>
+    body { font-family: Arial; padding: 20px; max-width: 600px; margin: auto; }
+    input, button { margin: 8px 0; padding: 6px; width: 100%; font-size: 16px; }
+    .box { padding: 15px; border: 1px solid #ccc; border-radius: 8px; margin-top: 20px; }
+    h2 { margin-top: 30px; }
+  </style>
+</head>
+<body>
+
+<h1>🔐 RSA Simulator</h1>
+<p>Enter two prime numbers to generate RSA keys, encrypt, and decrypt messages.</p>
+
+<div class="box">
+  <label>Prime p:</label>
+  <input id="p" type="number">
+
+  <label>Prime q:</label>
+  <input id="q" type="number">
+
+  <button onclick="generateKeys()">Generate RSA Keys</button>
+
+  <h2>Generated Keys</h2>
+  <p>n = <span id="nVal"></span></p>
+  <p>φ(n) = <span id="phiVal"></span></p>
+  <p>Public exponent e = <span id="eVal"></span></p>
+  <p>Private exponent d = <span id="dVal"></span></p>
+</div>
+
+<div class="box">
+  <h2>Encrypt</h2>
+  <label>Message (number):</label>
+  <input id="message" type="number">
+  <button onclick="encrypt()">Encrypt</button>
+  <p>Encrypted: <span id="cipherVal"></span></p>
+</div>
+
+<div class="box">
+  <h2>Decrypt</h2>
+  <label>Ciphertext:</label>
+  <input id="cipher" type="number">
+  <button onclick="decrypt()">Decrypt</button>
+  <p>Decrypted: <span id="plainVal"></span></p>
+</div>
+
+<script src="rsasim.js"></script>
+
+</body>
+</html>
