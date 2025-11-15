@@ -42,6 +42,15 @@ function modPow(base, exponent, mod) {
   return result;
 }
 
+
+function text2number (text) {
+  return Array.from(text).map(char => BigInt(char.charCodeAt(0)));
+}
+
+function number2text (numbers) {
+  return numbers.map(num => String.fromCharCode(Number(num))).join(''); 
+}
+
 let n, phi, e, d;
 
 // Generate RSA Keys
@@ -66,14 +75,16 @@ function generateKeys() {
 
 // Encrypt
 function encrypt() {
-  let m = BigInt(document.getElementById("message").value);
-  let c = modPow(m, e, n);
-  document.getElementById("cipherVal").textContent = c;
-}
+  let m = document.getElementById("message").value;
+  let m_numbers = text2number(m);
+  let c = m_numbers.map(num => modPow(num, e, n));
+  document.getElementById("cipherVal").textContent = c.join(", ");
+} 
 
 // Decrypt
 function decrypt() {
-  let c = BigInt(document.getElementById("cipher").value);
-  let m = modPow(c, d, n);
+  let c = document.getElementById("cipher").value.split(", ").map(x => BigInt(x.trim()));
+  let m = c.map(num => modPow(num, d, n));
+  m = number2text(m);
   document.getElementById("plainVal").textContent = m;
 }
